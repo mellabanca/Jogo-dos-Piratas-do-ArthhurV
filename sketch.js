@@ -5,6 +5,8 @@ const Constraint = Matter.Constraint;
 var engine, world, mesa;
 var pacifico;
 var player, revolucao;
+var francesa,francesa1;
+var russiavsucrania;
 
 function preload() {
 pacifico = loadImage("background.gif");
@@ -20,8 +22,12 @@ isStatic:true
 } 
 mesa= Bodies.rectangle(0,height-1, width*2,1,options);
 World.add(world,mesa);
-player = Bodies.rectangle(160,350,160,310,options);
+player = Bodies.rectangle(160,350,130,310,options);
 World.add(world,player);
+angleMode(DEGREES);
+francesa1 = 20;
+francesa = new RevolucaoFrancesa(180,150,145,100,francesa1);
+russiavsucrania = new Infantil(francesa.x,francesa.y);
 }
 
 function draw() {
@@ -31,6 +37,14 @@ Engine.update(engine);
 rect(mesa.position.x, mesa.position.y,width*2,1);
 push();
 imageMode(CENTER);
-image(revolucao,player.position.x, player.position.y, 160, 310);
+image(revolucao,player.position.x, player.position.y, 145, 310);
 pop();
+francesa.massacre();
+russiavsucrania.brinquedo();
+}
+
+function keyReleased(){
+if(keyCode === UP_ARROW){
+russiavsucrania.arminhadeagua();
+}
 }
