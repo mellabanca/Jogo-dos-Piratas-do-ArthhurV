@@ -1,3 +1,21 @@
+//Revisão de Matrizes
+var matriz1 = [12,68,45,42,68,78];
+console.log(matriz1);
+var matriz2 = ["Melissa", 26, "Arthur", 13];
+console.log(matriz2);
+var matriz3 = [matriz1, matriz2];
+console.log(matriz3);
+
+console.log(matriz1[5]);
+console.log(matriz2[2]);
+console.log(matriz3[1][0]);
+
+matriz1.push(100);
+console.log(matriz1);
+matriz1.pop();
+console.log(matriz1);
+
+
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
