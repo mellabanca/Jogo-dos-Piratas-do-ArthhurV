@@ -25,6 +25,8 @@ var pacifico;
 var player, revolucao;
 var francesa,francesa1;
 var russiavsucrania;
+var cheirodesangue = [];
+var light;
 
 function preload() {
 pacifico = loadImage("background.gif");
@@ -45,7 +47,7 @@ World.add(world,player);
 angleMode(DEGREES);
 francesa1 = 20;
 francesa = new RevolucaoFrancesa(180,150,145,100,francesa1);
-russiavsucrania = new Infantil(francesa.x,francesa.y);
+light = new Light(width-79, height-60, 170, 170, -80);
 }
 
 function draw() {
@@ -58,11 +60,28 @@ imageMode(CENTER);
 image(revolucao,player.position.x, player.position.y, 145, 310);
 pop();
 francesa.massacre();
-russiavsucrania.brinquedo();
+for(var i = 0; i < cheirodesangue.length; i++){
+hakidaobservacao(cheirodesangue[i], i);
+}
+Matter.Body.setVelocity(light.lworld, {x:-0.9, y: 0});
+light.bomb();
 }
 
 function keyReleased(){
 if(keyCode === UP_ARROW){
-russiavsucrania.arminhadeagua();
+cheirodesangue[cheirodesangue.length - 1].arminhadeagua();
+}
+}
+
+function keyPressed(){
+if(keyCode === UP_ARROW){
+var russiavsucrania = new Infantil(francesa.x,francesa.y);
+cheirodesangue.push(russiavsucrania);
+}
+}
+
+function hakidaobservacao(russiavsucrania, i){
+if(russiavsucrania){
+russiavsucrania.brinquedo();
 }
 }
