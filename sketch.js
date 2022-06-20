@@ -30,12 +30,23 @@ var revolucionarios = [];
 var minions2 = [];
 var minions2Imagens;
 var minions2Dados;
+var tubaraofantasma = [];
+var tubaraofantasmaImagens;
+var tubaraofantasmaDados;
+var CSGO = [];
+var CSGOImagens;
+var CSGODados;
+var nadarebommaiscuidadoaguatambemmata = false;
 
 function preload() {
 pacifico = loadImage("background.gif");
 revolucao = loadImage("tower.png");
 minions2Imagens = loadImage("boat.png");
 minions2Dados = loadJSON("boat.json");
+tubaraofantasmaImagens = loadImage("brokenBoat.png");
+tubaraofantasmaDados = loadJSON("brokenBoat.json");
+CSGOImagens = loadImage("waterSplash.png");
+CSGODados = loadJSON("waterSplash.json");
 }
 
 function setup() {
@@ -57,6 +68,18 @@ for(var i = 0; i < minions2Frames.length; i++){
 var pos = minions2Frames[i].position;
 var img = minions2Imagens.get(pos.x, pos.y, pos.w, pos.h);
 minions2.push(img);
+}
+var tubaraofantasmaFrames = tubaraofantasmaDados.frames;
+for(var i = 0; i < tubaraofantasmaFrames.length; i++){
+var pos = tubaraofantasmaFrames[i].position;
+var img = tubaraofantasmaImagens.get(pos.x, pos.y, pos.w, pos.h);
+tubaraofantasma.push(img);
+}
+var CSGOFrames = CSGODados.frames;
+for(var i = 0; i < CSGOFrames.length; i++){
+var pos = CSGOFrames[i].position;
+var img = CSGOImagens.get(pos.x, pos.y, pos.w, pos.h);
+CSGO.push(img);
 }
 }
 
@@ -93,6 +116,7 @@ cheirodesangue.push(russiavsucrania);
 function hakidaobservacao(russiavsucrania, i){
 if(russiavsucrania){
 russiavsucrania.brinquedo();
+russiavsucrania.animar();
 if(russiavsucrania.relogiodeparede.position.x >= width || russiavsucrania.relogiodeparede.position.y >= height -50){
 russiavsucrania.spike(i);
 }
@@ -113,6 +137,11 @@ if(revolucionarios[i]){
 Matter.Body.setVelocity(revolucionarios[i].lworld, {x:-0.9, y: 0});
 revolucionarios[i].bomb();
 revolucionarios[i].animar();
+var sea = Matter.SAT.collides(player, revolucionarios[i].lworld);
+if(sea.collided && !revolucionarios[i].titanic){
+nadarebommaiscuidadoaguatambemmata = true;
+sangue();
+}
 }
 }
 }else{
@@ -132,4 +161,19 @@ delete cheirodesangue[index]
 }
 }
 }
+}
+
+function sangue(){
+swal({
+title: "Game Over!",
+text: "Obrigado por jogar, dessa vez você perdeu, mas continue procurando tesouros",
+imageUrl: "https://raw.githubusercontent.com/whitehatjr/PiratesInvasion/main/assets/boat.png",
+imageSize: "150x150",
+confirmButtonText: "Próxima aventura"
+},
+function(botaoPressionado){
+if(botaoPressionado){
+location.reload();
+}
+})
 }

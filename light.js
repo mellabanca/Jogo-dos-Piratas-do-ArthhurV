@@ -7,6 +7,7 @@ class Light {
         this.buda = loadImage("boat.png");
         this.animation = anim;
         this.v = 0.05;
+        this.titanic = false
         World.add(world,this.lworld);
     }
     animar(){
@@ -25,6 +26,11 @@ class Light {
         pop();
     }
     spike(index){
+        this.animation = tubaraofantasma;
+        this.v = 0.05;
+        this.l = 300;
+        this.a = 300;
+        this.titanic = true;
         setTimeout(()=>{
         Matter.World.remove(world,revolucionarios[index].lworld);
         delete revolucionarios[index]
